@@ -1,13 +1,10 @@
 plugins {
-    kotlin("multiplatform") version "1.3.72"
-    id("kotlinx-atomicfu") version "0.14.2"
+    kotlin("multiplatform") version Versions.kotlin
+    id("kotlinx-atomicfu") version Versions.atomicfu
 }
 
-val GROUP: String by project
-val VERSION_NAME: String by project
-
-group = GROUP
-version = VERSION_NAME
+group = "com.tinder.statemachine"
+version = "0.2.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -37,9 +34,10 @@ kotlin {
             kotlin.srcDir("src/main/kotlin")
             dependencies {
                 implementation(kotlin("stdlib-common"))
-                implementation("org.jetbrains.kotlinx:atomicfu-common:0.14.2")
+                implementation("org.jetbrains.kotlinx:atomicfu:${Versions.atomicfu}")
             }
         }
+
         val commonTest by getting {
             kotlin.srcDir("src/test/kotlin")
             dependencies {
@@ -75,20 +73,23 @@ kotlin {
                 implementation(kotlin("test-junit"))
             }
         }
+
         val jsMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-js"))
             }
         }
+
         val jsTest by getting {
             dependencies {
                 implementation(kotlin("test-js"))
             }
         }
+
         val macosMain by getting {
         }
+
         val macosTest by getting {
         }
-
     }
 }
